@@ -1,11 +1,11 @@
 import { LexicalComposer, type InitialConfigType } from "@lexical/react/LexicalComposer"
 import { ContentEditable } from "@lexical/react/LexicalContentEditable"
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary"
-import { RichTextPlugin } from "./plugins/RichTextPlugin"
+import { RichTextPlugin } from "./plugins/ReactRichTextPlugin"
 import editorTheme from "./theme"
 
 const config: InitialConfigType = {
-  namespace: "lexical Markdown editor",
+  namespace: "Lexical markdown editor",
   onError: (e) => {
     // TODO: handle error
     console.log(e)
