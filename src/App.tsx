@@ -1,9 +1,7 @@
+import Editor from "./Editor"
+
 const App = () => {
-  return (
-    <section className="prose">
-      <h2>Lexical editor</h2>
-    </section>
-  )
+  return <Editor />
 }
 
 export default App
