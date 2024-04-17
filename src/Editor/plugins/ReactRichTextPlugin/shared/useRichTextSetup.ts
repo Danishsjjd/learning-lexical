@@ -1,7 +1,7 @@
 import type { LexicalEditor } from "lexical"
 
 import { registerDragonSupport } from "@lexical/dragon"
-import { registerRichText } from "@lexical/rich-text"
+import { registerRichText } from "../../rich-text/index"
 import { mergeRegister } from "@lexical/utils"
 import useLayoutEffectImpl from "../../../shared/useLayoutEffect"
 
