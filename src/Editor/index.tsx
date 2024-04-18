@@ -1,10 +1,12 @@
 import { LexicalComposer, type InitialConfigType } from "@lexical/react/LexicalComposer"
 import { ContentEditable } from "@lexical/react/LexicalContentEditable"
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary"
+import { MultipleEditorStorePlugin } from "./plugins/MultipleEditorStorePlugin"
 import ReactPopulateRichText from "./plugins/ReactPopulateRichText"
 import { RichTextPlugin } from "./plugins/ReactRichTextPlugin"
+import { EmojiNode } from "./plugins/emoji/EmojiNode"
 import editorTheme from "./theme"
-import { MultipleEditorStorePlugin } from "./plugins/MultipleEditorStorePlugin"
+import { ReactEmojiSetup } from "./plugins/ReactEmojiSetup"
 
 const config: InitialConfigType = {
   namespace: "Lexical markdown editor",
@@ -13,6 +15,7 @@ const config: InitialConfigType = {
     console.error(e)
   },
   theme: editorTheme,
+  nodes: [EmojiNode],
 }
 
 const Editor = ({ id }: { id: string }) => {
@@ -28,6 +31,7 @@ const Editor = ({ id }: { id: string }) => {
         />
       </section>
 
+      <ReactEmojiSetup />
       <ReactPopulateRichText />
       <MultipleEditorStorePlugin id={id} />
     </LexicalComposer>
