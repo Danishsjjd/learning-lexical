@@ -41,6 +41,9 @@ importers:
       '@lexical/yjs':
         specifier: ^0.14.5
         version: 0.14.5(yjs@13.6.14)
+      emoji-datasource-facebook:
+        specifier: ^15.1.2
+        version: 15.1.2
       lexical:
         specifier: ^0.14.5
         version: 0.14.5
@@ -850,6 +853,9 @@ packages:
 
   electron-to-chromium@1.4.738:
     resolution: {integrity: sha512-lwKft2CLFztD+vEIpesrOtCrko/TFnEJlHFdRhazU7Y/jx5qc4cqsocfVrBg4So4gGe9lvxnbLIoev47WMpg+A==}
+
+  emoji-datasource-facebook@15.1.2:
+    resolution: {integrity: sha512-6uQXO3FOpkkxclzI0YvoHorSoUyA4NnCWCXBMWDgy5mymtnWGLDkoY+/wTQCmW1/3PIUUh47SOWPp3hdq4+Svg==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -2361,6 +2367,8 @@ snapshots:
   eastasianwidth@0.2.0: {}
 
   electron-to-chromium@1.4.738: {}
+
+  emoji-datasource-facebook@15.1.2: {}
 
   emoji-regex@8.0.0: {}
 

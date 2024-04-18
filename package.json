@@ -22,6 +22,7 @@
     "@lexical/selection": "^0.14.5",
     "@lexical/utils": "^0.14.5",
     "@lexical/yjs": "^0.14.5",
+    "emoji-datasource-facebook": "^15.1.2",
     "lexical": "^0.14.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
