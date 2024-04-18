@@ -65,3 +65,11 @@ export const useEditor = (id: string): LexicalEditor | null => {
   }
   return context.editors[id] || null
 }
+
+export const useActiveEditor = (): LexicalEditor | null => {
+  const context = useContext(EditorContext)
+  if (context === null) {
+    throw new Error(`The \`useEditor\` hook must be used inside the <EditorProvider> component's context.`)
+  }
+  return context.editors[context.activeEditorId] || null
+}

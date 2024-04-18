@@ -50,11 +50,11 @@ const config: InitialConfigType = {
 const Editor = ({ id }: { id: string }) => {
   return (
     <LexicalComposer initialConfig={config}>
-      <section className="max-w-2xl mx-auto my-6 rounded-xl border relative overflow-hidden">
+      <section className="relative mx-auto my-6 max-w-2xl overflow-hidden rounded-xl border">
         <RichTextPlugin
-          contentEditable={<ContentEditable className="py-4 px-3 w-full max-w-2xl rounded-xl prose" />}
+          contentEditable={<ContentEditable className="prose w-full max-w-2xl rounded-xl px-3 py-4" />}
           placeholder={
-            <div className="text-gray-400 overflow-hidden absolute top-4 left-3">Enter some rich text...</div>
+            <div className="absolute left-3 top-4 overflow-hidden text-gray-400">Enter some rich text...</div>
           }
           ErrorBoundary={LexicalErrorBoundary}
         />
