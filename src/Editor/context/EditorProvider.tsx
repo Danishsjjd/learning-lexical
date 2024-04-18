@@ -1,9 +1,11 @@
-import { createContext, useContext, useCallback, useMemo, useState } from "react"
 import { LexicalEditor } from "lexical"
+import { Dispatch, SetStateAction, createContext, useCallback, useContext, useState } from "react"
 
 type EditorMutations = {
   createEditor: (id: string, editor: LexicalEditor) => void
   deleteEditor: (id: string) => void
+  activeEditorId: string
+  setActiveEditorId: Dispatch<SetStateAction<string>>
 }
 
 type EditorMap = Record<string, LexicalEditor>
@@ -16,6 +18,7 @@ const EditorContext = createContext<EditorContextValue | null>(null)
 
 export const EditorProvider = (props: React.PropsWithChildren<{}>) => {
   const [editors, setEditors] = useState<EditorMap>({})
+  const [activeEditorId, setActiveEditorId] = useState("1")
 
   const createEditor = useCallback((id: string, editor: LexicalEditor) => {
     setEditors((editors) => {
@@ -32,15 +35,19 @@ export const EditorProvider = (props: React.PropsWithChildren<{}>) => {
     })
   }, [])
 
-  const value = useMemo(() => {
-    return {
-      editors,
-      createEditor,
-      deleteEditor,
-    }
-  }, [editors, createEditor, deleteEditor])
-
-  return <EditorContext.Provider value={value}>{props.children}</EditorContext.Provider>
+  return (
+    <EditorContext.Provider
+      value={{
+        editors,
+        createEditor,
+        deleteEditor,
+        activeEditorId,
+        setActiveEditorId,
+      }}
+    >
+      {props.children}
+    </EditorContext.Provider>
+  )
 }
 
 export const useEditors = (): EditorMutations => {
@@ -48,8 +55,7 @@ export const useEditors = (): EditorMutations => {
   if (context === null) {
     throw new Error(`The \`useEditors\` hook must be used inside the <EditorProvider> component's context.`)
   }
-  const { createEditor, deleteEditor } = context
-  return { createEditor, deleteEditor }
+  return context
 }
 
 export const useEditor = (id: string): LexicalEditor | null => {

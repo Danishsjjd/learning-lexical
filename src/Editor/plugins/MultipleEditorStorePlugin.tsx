@@ -1,18 +1,34 @@
-import { useEffect } from "react"
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
+import { COMMAND_PRIORITY_CRITICAL, FOCUS_COMMAND } from "lexical"
+import { useEffect } from "react"
 import { useEditors } from "../context/EditorProvider"
 
 export type MultipleEditorStorePluginProps = {
   id: string
 }
 
-export function MultipleEditorStorePlugin(props: MultipleEditorStorePluginProps) {
-  const { id } = props
+export function MultipleEditorStorePlugin({ id }: MultipleEditorStorePluginProps) {
   const [editor] = useLexicalComposerContext()
-  const editors = useEditors()
+  const { createEditor, deleteEditor, setActiveEditorId } = useEditors()
+
   useEffect(() => {
-    editors.createEditor(id, editor)
-    return () => editors.deleteEditor(id)
-  }, [id, editor]) // eslint-disable-line react-hooks/exhaustive-deps
+    createEditor(id, editor)
+
+    return () => {
+      deleteEditor(id)
+    }
+  }, [id, editor, createEditor, deleteEditor])
+
+  useEffect(() => {
+    return editor.registerCommand(
+      FOCUS_COMMAND,
+      () => {
+        setActiveEditorId(id)
+        return false
+      },
+      COMMAND_PRIORITY_CRITICAL
+    )
+  }, [editor, id, setActiveEditorId])
+
   return null
 }

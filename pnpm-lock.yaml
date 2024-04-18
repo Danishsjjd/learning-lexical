@@ -20,6 +20,9 @@ importers:
       '@lexical/list':
         specifier: ^0.14.5
         version: 0.14.5
+      '@lexical/markdown':
+        specifier: ^0.14.5
+        version: 0.14.5
       '@lexical/overflow':
         specifier: ^0.14.5
         version: 0.14.5
