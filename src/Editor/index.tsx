@@ -5,9 +5,10 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin"
 import { $createParagraphNode, $createTextNode, $getRoot } from "lexical"
 import { MultipleEditorStorePlugin } from "./plugins/MultipleEditorStore"
 import TreeViewPlugin from "./plugins/TreeViewPlugin"
-import { EmojiNode } from "./plugins/emoji/EmojiNode"
-import { ReactEmojiSetup } from "./plugins/emoji/ReactEmojiSetup"
+import { EmojiNode } from "./plugins/Emoji/EmojiNode"
+import { ReactEmojiPlugin } from "./plugins/Emoji/ReactEmojiPlugin"
 import editorTheme from "./theme"
+import TestingPlugin from "./plugins/Testing"
 
 const config: InitialConfigType = {
   namespace: "Lexical markdown editor",
@@ -62,8 +63,9 @@ const Editor = ({ id }: { id: string }) => {
         <TreeViewPlugin />
       </section>
 
-      <ReactEmojiSetup />
+      <ReactEmojiPlugin />
       <MultipleEditorStorePlugin id={id} />
+      <TestingPlugin />
     </LexicalComposer>
   )
 }

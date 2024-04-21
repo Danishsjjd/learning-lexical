@@ -1,6 +1,6 @@
 import Editor from "./Editor"
 import { EditorProvider } from "./Editor/context/EditorProvider"
-import ToolbarPlugin from "./Editor/plugins/ReactToolbar"
+import ToolbarPlugin from "./Editor/plugins/Toolbar"
 
 const App = () => {
   return (

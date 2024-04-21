@@ -12,7 +12,7 @@ import {
   UNDO_COMMAND,
 } from "lexical"
 import { ComponentPropsWithoutRef, useCallback, useEffect, useRef, useState } from "react"
-import { useActiveEditor } from "../context/EditorProvider"
+import { useActiveEditor } from "../../context/EditorProvider"
 
 const LowPriority = 1
 
