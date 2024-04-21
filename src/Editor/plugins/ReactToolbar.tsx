@@ -88,7 +88,10 @@ function ToolbarPluginProvider({ editor }: { editor: LexicalEditor }) {
   }, [editor, $updateToolbar])
 
   return (
-    <div className="mb-1 flex items-center justify-center rounded-tl-lg rounded-tr-lg bg-white p-1" ref={toolbarRef}>
+    <div
+      className="sticky top-0 z-50 mb-1 flex items-center justify-center rounded-tl-lg rounded-tr-lg bg-white p-1"
+      ref={toolbarRef}
+    >
       <Button disabled={!canUndo} onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)} aria-label="Undo">
         <span>U</span>
       </Button>

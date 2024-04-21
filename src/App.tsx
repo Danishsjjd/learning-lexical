@@ -6,8 +6,10 @@ const App = () => {
   return (
     <EditorProvider>
       <ToolbarPlugin />
-      <Editor id="1" />
-      <Editor id="2" />
+      <div className="pb-10">
+        <Editor id="1" />
+        <Editor id="2" />
+      </div>
     </EditorProvider>
   )
 }
