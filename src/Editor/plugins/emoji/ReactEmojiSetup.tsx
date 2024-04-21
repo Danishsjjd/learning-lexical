@@ -1,6 +1,6 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
-import useLayoutEffectImpl from "../shared/useLayoutEffect"
-import { registerEmoji } from "./emoji/EmojiPlugin"
+import useLayoutEffectImpl from "../../shared/useLayoutEffect"
+import { registerEmoji } from "./EmojiPlugin"
 
 export function ReactEmojiSetup() {
   const [editor] = useLexicalComposerContext()

@@ -2,12 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
-.emoji-node {
-  caret-color: #050505;
-  color: transparent;
-  background-size: 1em 1em;
-  display: inline-block;
-  vertical-align: top;
-  width: 1em;
-  height: 1em;
+@layer utilities {
+  .emoji-node {
+    caret-color: #050505;
+    color: transparent;
+    background-size: 1em 1em;
+    display: inline-block;
+    vertical-align: top;
+    width: 1em;
+    height: 1em;
+  }
+
+  /* ------------------- tree view plugin ------------------- */
+  .tree-view-output {
+    display: block;
+    background: #222;
+    color: #fff;
+    padding: 0;
+    font-size: 12px;
+    margin: 1px auto 10px auto;
+    position: relative;
+    overflow: hidden;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .debug-treetype-button {
+    border: 0;
+    padding: 0;
+    font-size: 12px;
+    top: 10px;
+    right: 85px;
+    position: absolute;
+    background: none;
+    color: #fff;
+  }
+
+  .debug-treetype-button:hover {
+    text-decoration: underline;
+  }
+
+  .debug-timetravel-panel {
+    overflow: hidden;
+    padding: 0 0 10px 0;
+    margin: auto;
+    display: flex;
+  }
+
+  .debug-timetravel-panel-slider {
+    padding: 0;
+    flex: 8;
+  }
+
+  .debug-timetravel-panel-button {
+    padding: 0;
+    border: 0;
+    background: none;
+    flex: 1;
+    color: #fff;
+    font-size: 12px;
+  }
+
+  .debug-timetravel-panel-button:hover {
+    text-decoration: underline;
+  }
+
+  .debug-timetravel-button {
+    border: 0;
+    padding: 0;
+    font-size: 12px;
+    top: 10px;
+    right: 15px;
+    position: absolute;
+    background: none;
+    color: #fff;
+  }
+
+  .debug-timetravel-button:hover {
+    text-decoration: underline;
+  }
 }

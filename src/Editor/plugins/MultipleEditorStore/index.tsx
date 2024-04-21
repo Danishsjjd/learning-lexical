@@ -1,7 +1,7 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
 import { COMMAND_PRIORITY_CRITICAL, FOCUS_COMMAND } from "lexical"
 import { useEffect } from "react"
-import { useEditors } from "../context/EditorProvider"
+import { useEditors } from "../../context/EditorProvider"
 
 export type MultipleEditorStorePluginProps = {
   id: string

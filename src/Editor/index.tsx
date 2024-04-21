@@ -1,12 +1,13 @@
 import { LexicalComposer, type InitialConfigType } from "@lexical/react/LexicalComposer"
 import { ContentEditable } from "@lexical/react/LexicalContentEditable"
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary"
-import { MultipleEditorStorePlugin } from "./plugins/MultipleEditorStorePlugin"
-import { RichTextPlugin } from "./plugins/ReactRichTextPlugin"
-import { EmojiNode } from "./plugins/emoji/EmojiNode"
-import editorTheme from "./theme"
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin"
 import { $createParagraphNode, $createTextNode, $getRoot } from "lexical"
-import { ReactEmojiSetup } from "./plugins/ReactEmojiSetup"
+import { MultipleEditorStorePlugin } from "./plugins/MultipleEditorStore"
+import TreeViewPlugin from "./plugins/TreeViewPlugin"
+import { EmojiNode } from "./plugins/emoji/EmojiNode"
+import { ReactEmojiSetup } from "./plugins/emoji/ReactEmojiSetup"
+import editorTheme from "./theme"
 
 const config: InitialConfigType = {
   namespace: "Lexical markdown editor",
@@ -52,12 +53,13 @@ const Editor = ({ id }: { id: string }) => {
     <LexicalComposer initialConfig={config}>
       <section className="relative mx-auto my-6 max-w-2xl overflow-hidden rounded-xl border">
         <RichTextPlugin
-          contentEditable={<ContentEditable className="prose w-full max-w-2xl rounded-xl px-3 py-4" />}
+          contentEditable={<ContentEditable className="prose w-full max-w-2xl rounded-tl-xl rounded-tr-xl px-3 py-4" />}
           placeholder={
             <div className="absolute left-3 top-4 overflow-hidden text-gray-400">Enter some rich text...</div>
           }
           ErrorBoundary={LexicalErrorBoundary}
         />
+        <TreeViewPlugin />
       </section>
 
       <ReactEmojiSetup />
