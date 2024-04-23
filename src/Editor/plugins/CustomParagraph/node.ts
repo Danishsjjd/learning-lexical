@@ -1,11 +1,19 @@
-import { ElementNode, LexicalNode } from "lexical"
+import { ElementNode, LexicalNode, SerializedElementNode, SerializedLexicalNode } from "lexical"
 
-class CustomParagraph extends ElementNode {
+class CustomParagraphNode extends ElementNode {
   static getType(): string {
     return "custom-paragraph"
   }
-  static clone(node: CustomParagraph): CustomParagraph {
-    return new CustomParagraph(node.__key)
+  static clone(node: CustomParagraphNode): CustomParagraphNode {
+    return new CustomParagraphNode(node.__key)
+  }
+
+  static importJSON(_serializedNode: SerializedLexicalNode): LexicalNode {
+    return super.importJSON(_serializedNode)
+  }
+
+  exportJSON(): SerializedElementNode<SerializedLexicalNode> {
+    return this.exportJSON()
   }
 
   createDOM(): HTMLElement {
@@ -14,21 +22,14 @@ class CustomParagraph extends ElementNode {
     dom.style.color = "red"
     return dom
   }
-
-  updateDOM(prevNode: CustomParagraph, dom: HTMLElement): boolean {
-    console.log({ prevNode, dom })
-    // Returning false tells Lexical that this node does not need its
-    // DOM element replacing with a new copy from createDOM.
-    return false
-  }
 }
 
-export function $createCustomParagraphNode(): CustomParagraph {
-  return new CustomParagraph()
+export function $createCustomParagraphNode(): CustomParagraphNode {
+  return new CustomParagraphNode()
 }
 
-export function $isCustomParagraphNode(node: LexicalNode | null | undefined): node is CustomParagraph {
-  return node instanceof CustomParagraph
+export function $isCustomParagraphNode(node: LexicalNode | null | undefined): node is CustomParagraphNode {
+  return node instanceof CustomParagraphNode
 }
 
-export default CustomParagraph
+export default CustomParagraphNode

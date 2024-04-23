@@ -2,39 +2,36 @@ import { LexicalComposer, type InitialConfigType } from "@lexical/react/LexicalC
 import { ContentEditable } from "@lexical/react/LexicalContentEditable"
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary"
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin"
+import { HeadingNode } from "@lexical/rich-text"
 import { $createParagraphNode, $createTextNode, $getRoot } from "lexical"
 import { ReactCustomParagraphPlugin } from "./plugins/CustomParagraph/ReactCustomParagraph"
-import CustomParagraph from "./plugins/CustomParagraph/node"
+import CustomParagraphNode from "./plugins/CustomParagraph/node"
 import { EmojiNode } from "./plugins/Emoji/EmojiNode"
 import { ReactEmojiPlugin } from "./plugins/Emoji/ReactEmojiPlugin"
 import { MultipleEditorStorePlugin } from "./plugins/MultipleEditorStore"
 import TestingPlugin from "./plugins/Testing"
 import TreeViewPlugin from "./plugins/TreeViewPlugin"
+import { $createUnremovableHeading, UnremovableHeadingNode } from "./plugins/UnremovableHeading/node"
 import editorTheme from "./theme"
+import { HEADING } from "@lexical/markdown"
+import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin"
 
 const config: InitialConfigType = {
   namespace: "Lexical markdown editor",
   onError: (e) => {
     // TODO: handle error
-    console.error(e)
+    console.error("error:", e)
   },
   theme: editorTheme,
-  nodes: [EmojiNode, CustomParagraph],
+  nodes: [HeadingNode, UnremovableHeadingNode, CustomParagraphNode, EmojiNode],
   editorState() {
     const root = $getRoot()
 
     if (root.getFirstChild() !== null) return
 
-    // const heading = $createHeadingNode("h1")
-    // heading.append($createTextNode("Welcome to the Vanilla JS Lexical Demo!"))
-    // root.append(heading)
-    // const quote = $createQuoteNode()
-    // quote.append(
-    //   $createTextNode(
-    //     `In case you were wondering what the text area at the bottom is – it's the debug view, showing the current state of the editor. `
-    //   )
-    // )
-    // root.append(quote)
+    const heading = $createUnremovableHeading("h2")
+    heading.append($createTextNode("Welcome to the Vanilla JS Lexical Demo!"))
+    root.append(heading)
 
     const paragraph = $createParagraphNode()
     paragraph.append(
@@ -47,6 +44,7 @@ const config: InitialConfigType = {
       $createTextNode("different").toggleFormat("italic"),
       $createTextNode(" formats.")
     )
+
     root.append(paragraph)
   },
 }
@@ -63,6 +61,7 @@ const Editor = ({ id }: { id: string }) => {
           ErrorBoundary={LexicalErrorBoundary}
         />
         <TreeViewPlugin />
+        <MarkdownShortcutPlugin transformers={[HEADING]} />
       </section>
 
       <ReactEmojiPlugin />

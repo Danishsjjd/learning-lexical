@@ -13,6 +13,24 @@
     height: 1em;
   }
 
+  /* editor inline element */
+  .editor-textBold {
+    font-weight: bold;
+  }
+  .editor-textItalic {
+    font-style: italic;
+  }
+  .editor-textUnderline {
+    text-decoration: underline;
+  }
+  .editor-textStrikethrough {
+    text-decoration: line-through;
+  }
+
+  .editor-text-underlineStrikethrough {
+    text-decoration: underline line-through;
+  }
+
   /* ------------------- tree view plugin ------------------- */
   .tree-view-output {
     display: block;
