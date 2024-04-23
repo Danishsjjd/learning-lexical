@@ -3,12 +3,14 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable"
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary"
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin"
 import { $createParagraphNode, $createTextNode, $getRoot } from "lexical"
-import { MultipleEditorStorePlugin } from "./plugins/MultipleEditorStore"
-import TreeViewPlugin from "./plugins/TreeViewPlugin"
+import { ReactCustomParagraphPlugin } from "./plugins/CustomParagraph/ReactCustomParagraph"
+import CustomParagraph from "./plugins/CustomParagraph/node"
 import { EmojiNode } from "./plugins/Emoji/EmojiNode"
 import { ReactEmojiPlugin } from "./plugins/Emoji/ReactEmojiPlugin"
-import editorTheme from "./theme"
+import { MultipleEditorStorePlugin } from "./plugins/MultipleEditorStore"
 import TestingPlugin from "./plugins/Testing"
+import TreeViewPlugin from "./plugins/TreeViewPlugin"
+import editorTheme from "./theme"
 
 const config: InitialConfigType = {
   namespace: "Lexical markdown editor",
@@ -17,7 +19,7 @@ const config: InitialConfigType = {
     console.error(e)
   },
   theme: editorTheme,
-  nodes: [EmojiNode],
+  nodes: [EmojiNode, CustomParagraph],
   editorState() {
     const root = $getRoot()
 
@@ -66,6 +68,7 @@ const Editor = ({ id }: { id: string }) => {
       <ReactEmojiPlugin />
       <MultipleEditorStorePlugin id={id} />
       <TestingPlugin />
+      <ReactCustomParagraphPlugin />
     </LexicalComposer>
   )
 }

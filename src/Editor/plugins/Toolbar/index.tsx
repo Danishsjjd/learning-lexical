@@ -13,6 +13,7 @@ import {
 } from "lexical"
 import { ComponentPropsWithoutRef, useCallback, useEffect, useRef, useState } from "react"
 import { useActiveEditor } from "../../context/EditorProvider"
+import { INSERT_CUSTOM_PARAGRAPH_COMMAND } from "../CustomParagraph/plugin"
 
 const LowPriority = 1
 
@@ -138,6 +139,13 @@ function ToolbarPluginProvider({ editor }: { editor: LexicalEditor }) {
         aria-label="Format Strikethrough"
       >
         <span>ST</span>
+      </Button>
+      <Divider />
+      <Button
+        onClick={() => editor.dispatchCommand(INSERT_CUSTOM_PARAGRAPH_COMMAND, undefined)}
+        aria-label="Insert custom paragraph"
+      >
+        <span>CP</span>
       </Button>
       <Divider />
       <Button onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")} aria-label="Left Align">
