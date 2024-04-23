@@ -15,6 +15,7 @@ import { $createUnremovableHeading, UnremovableHeadingNode } from "./plugins/Unr
 import editorTheme from "./theme"
 import { HEADING } from "@lexical/markdown"
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin"
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin"
 
 const config: InitialConfigType = {
   namespace: "Lexical markdown editor",
@@ -62,6 +63,7 @@ const Editor = ({ id }: { id: string }) => {
         />
         <TreeViewPlugin />
         <MarkdownShortcutPlugin transformers={[HEADING]} />
+        <HistoryPlugin />
       </section>
 
       <ReactEmojiPlugin />

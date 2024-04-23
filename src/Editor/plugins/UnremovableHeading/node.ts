@@ -7,14 +7,14 @@ export class UnremovableHeadingNode extends HeadingNode {
   }
 
   static clone(node: UnremovableHeadingNode) {
-    return new UnremovableHeadingNode(node.__tag, node.__key)
+    return new UnremovableHeadingNode(node.__tag)
   }
   static importJSON(serializedNode: SerializedHeadingNode): HeadingNode {
     return super.importJSON(serializedNode)
   }
 
   exportJSON(): SerializedHeadingNode {
-    return this.exportJSON()
+    return { ...super.exportJSON(), type: "unremovable-heading" }
   }
 
   remove() {
