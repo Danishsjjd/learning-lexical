@@ -1,4 +1,4 @@
-import type { EditorConfig, NodeKey, SerializedTextNode, Spread } from "lexical"
+import type { NodeKey, SerializedTextNode, Spread } from "lexical"
 
 import { TextNode } from "lexical"
 
@@ -34,7 +34,7 @@ export class EmojiNode extends TextNode {
    * DOM that will be rendered by browser within contenteditable
    * This is what Lexical renders
    */
-  createDOM(_config: EditorConfig): HTMLElement {
+  createDOM(): HTMLElement {
     const dom = document.createElement("span")
     dom.className = "emoji-node"
     dom.style.backgroundImage = `url('${BASE_EMOJI_URI}/${this.__unifiedID}.png')`

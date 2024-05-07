@@ -1,19 +1,19 @@
-import { ElementNode, LexicalNode, SerializedElementNode, SerializedLexicalNode } from "lexical"
+import { LexicalNode, ParagraphNode, SerializedParagraphNode } from "lexical"
 
-class CustomParagraphNode extends ElementNode {
+const type = "custom-paragraph"
+class CustomParagraphNode extends ParagraphNode {
   static getType(): string {
-    return "custom-paragraph"
+    return type
   }
   static clone(node: CustomParagraphNode): CustomParagraphNode {
     return new CustomParagraphNode(node.__key)
   }
-
-  static importJSON(_serializedNode: SerializedLexicalNode): LexicalNode {
-    return super.importJSON(_serializedNode)
+  static importJSON(serializedNode: SerializedParagraphNode): ParagraphNode {
+    return super.importJSON(serializedNode)
   }
 
-  exportJSON(): SerializedElementNode<SerializedLexicalNode> {
-    return this.exportJSON()
+  exportJSON(): SerializedParagraphNode {
+    return { ...super.exportJSON(), type }
   }
 
   createDOM(): HTMLElement {

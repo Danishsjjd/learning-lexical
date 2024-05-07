@@ -1,21 +1,20 @@
+import { HEADING } from "@lexical/markdown"
 import { LexicalComposer, type InitialConfigType } from "@lexical/react/LexicalComposer"
 import { ContentEditable } from "@lexical/react/LexicalContentEditable"
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary"
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin"
+import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin"
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin"
 import { HeadingNode } from "@lexical/rich-text"
 import { $createParagraphNode, $createTextNode, $getRoot } from "lexical"
 import { ReactCustomParagraphPlugin } from "./plugins/CustomParagraph/ReactCustomParagraph"
 import CustomParagraphNode from "./plugins/CustomParagraph/node"
-import { EmojiNode } from "./plugins/Emoji/EmojiNode"
-import { ReactEmojiPlugin } from "./plugins/Emoji/ReactEmojiPlugin"
-import { MultipleEditorStorePlugin } from "./plugins/MultipleEditorStore"
-import TestingPlugin from "./plugins/Testing"
+import ToolbarPlugin from "./plugins/Toolbar"
 import TreeViewPlugin from "./plugins/TreeViewPlugin"
 import { $createUnremovableHeading, UnremovableHeadingNode } from "./plugins/UnremovableHeading/node"
+import { EmojiNode } from "./plugins/emoji/EmojiNode"
+import { ReactEmojiPlugin } from "./plugins/emoji/ReactEmojiPlugin"
 import editorTheme from "./theme"
-import { HEADING } from "@lexical/markdown"
-import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin"
-import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin"
 
 const config: InitialConfigType = {
   namespace: "Lexical markdown editor",
@@ -50,9 +49,11 @@ const config: InitialConfigType = {
   },
 }
 
-const Editor = ({ id }: { id: string }) => {
+const Editor = () => {
   return (
     <LexicalComposer initialConfig={config}>
+      <ToolbarPlugin />
+
       <section className="relative mx-auto my-6 max-w-2xl overflow-hidden rounded-xl border">
         <RichTextPlugin
           contentEditable={<ContentEditable className="prose w-full max-w-2xl rounded-tl-xl rounded-tr-xl px-3 py-4" />}
@@ -67,8 +68,6 @@ const Editor = ({ id }: { id: string }) => {
       </section>
 
       <ReactEmojiPlugin />
-      <MultipleEditorStorePlugin id={id} />
-      <TestingPlugin />
       <ReactCustomParagraphPlugin />
     </LexicalComposer>
   )

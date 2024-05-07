@@ -6,14 +6,13 @@ import {
   CAN_UNDO_COMMAND,
   FORMAT_ELEMENT_COMMAND,
   FORMAT_TEXT_COMMAND,
-  LexicalEditor,
   REDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
   UNDO_COMMAND,
 } from "lexical"
 import { ComponentPropsWithoutRef, useCallback, useEffect, useRef, useState } from "react"
-import { useActiveEditor } from "../../context/EditorProvider"
 import { INSERT_CUSTOM_PARAGRAPH_COMMAND } from "../CustomParagraph/plugin"
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
 
 const LowPriority = 1
 
@@ -21,18 +20,14 @@ function Divider() {
   return <div className="mx-1 w-px self-stretch bg-neutral-200" />
 }
 
-export default function ToolbarPlugin() {
-  const editor = useActiveEditor()
-
-  if (!editor) return null
-  return <ToolbarPluginProvider editor={editor} />
-}
 const itemClasses =
     "rounded-lg border-0 bg-none p-2 text-sm opacity-60 disabled:opacity-20 disabled:cursor-not-allowed [&>span]:flex [&>span]:aspect-square [&>span]:size-6 [&>span]:items-center [&>span]:justify-center",
   spacedClasses = "mr-0.5",
   activeClasses = "bg-gray-300"
 
-function ToolbarPluginProvider({ editor }: { editor: LexicalEditor }) {
+function ToolbarPlugin() {
+  const [editor] = useLexicalComposerContext()
+
   const toolbarRef = useRef(null)
   const [canUndo, setCanUndo] = useState(false)
   const [canRedo, setCanRedo] = useState(false)
@@ -167,3 +162,5 @@ function ToolbarPluginProvider({ editor }: { editor: LexicalEditor }) {
 const Button = ({ className, active, ...props }: ComponentPropsWithoutRef<"button"> & { active?: boolean }) => {
   return <button className={`${itemClasses} ${spacedClasses} ${active ? activeClasses : ""} ${className}`} {...props} />
 }
+
+export default ToolbarPlugin
