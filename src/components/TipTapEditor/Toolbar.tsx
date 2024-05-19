@@ -15,7 +15,7 @@ const ToolBar = () => {
       <div className={toolbarClasses}>
         <ToolbarButton
           disabled={!editor.can().chain().focus().undo().run()}
-          onClick={() => editor.chain().focus().redo().run()}
+          onClick={() => editor.chain().focus().undo().run()}
           aria-label="Undo"
         >
           <span>U</span>

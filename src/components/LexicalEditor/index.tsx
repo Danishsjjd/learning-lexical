@@ -1,4 +1,4 @@
-import { $convertToMarkdownString, HEADING } from "@lexical/markdown"
+import { $convertFromMarkdownString, HEADING } from "@lexical/markdown"
 import { LexicalComposer, type InitialConfigType } from "@lexical/react/LexicalComposer"
 import { ContentEditable } from "@lexical/react/LexicalContentEditable"
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary"
@@ -6,16 +6,15 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin"
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin"
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin"
 import { HeadingNode } from "@lexical/rich-text"
-import { $createParagraphNode, $createTextNode, $getRoot } from "lexical"
+import { containerClasses, sectionClasses, sections } from "../../data"
 import { ReactCustomParagraphPlugin } from "./plugins/CustomParagraph/ReactCustomParagraph"
 import CustomParagraphNode from "./plugins/CustomParagraph/node"
 import ToolbarPlugin from "./plugins/Toolbar"
 import TreeViewPlugin from "./plugins/TreeViewPlugin"
-import { $createUnremovableHeading, UnremovableHeadingNode } from "./plugins/UnremovableHeading/node"
+import { UnremovableHeadingNode } from "./plugins/UnremovableHeading/node"
 import { EmojiNode } from "./plugins/emoji/EmojiNode"
 import { ReactEmojiPlugin } from "./plugins/emoji/ReactEmojiPlugin"
 import editorTheme from "./theme"
-import { containerClasses, sectionClasses } from "../../data"
 
 const config: InitialConfigType = {
   namespace: "Lexical markdown editor",
@@ -26,29 +25,7 @@ const config: InitialConfigType = {
   theme: editorTheme,
   nodes: [HeadingNode, UnremovableHeadingNode, CustomParagraphNode, EmojiNode],
   editorState() {
-    const root = $getRoot()
-
-    if (root.getFirstChild() !== null) return
-
-    const heading = $createUnremovableHeading("h2")
-    heading.append($createTextNode("Welcome to the Vanilla JS Lexical Demo!"))
-    root.append(heading)
-
-    const paragraph = $createParagraphNode()
-    paragraph.append(
-      $createTextNode("This is a demo environment built with "),
-      $createTextNode("lexical").toggleFormat("code"),
-      $createTextNode("."),
-      $createTextNode(" Try typing in "),
-      $createTextNode("some text").toggleFormat("bold"),
-      $createTextNode(" with "),
-      $createTextNode("different").toggleFormat("italic"),
-      $createTextNode(" formats.")
-    )
-
-    root.append(paragraph)
-
-    console.log($convertToMarkdownString())
+    $convertFromMarkdownString(sections[0].section)
   },
 }
 

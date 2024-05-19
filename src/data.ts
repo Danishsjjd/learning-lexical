@@ -5,6 +5,11 @@ export const containerClasses = "prose w-full max-w-2xl rounded-xl px-3 py-4",
 export const sections = [
   {
     section:
+      "## Welcome to the Rich editor Demo!\n\nThis is a demo environment. Try typing in **some text** with *different* formats.",
+    id: "2cdaedfc-9aef-41e1-ba57-0e41092192fe",
+  },
+  {
+    section:
       "## Headers\n\n*This text will be italic*\n\n_This will also be italic_\n\n**This text will be bold**\n\n__This will also be bold__\n\n_You **can** combine them_",
     id: "609dd7ce-8970-4aae-b462-908d0b10b905",
   },
@@ -41,10 +46,5 @@ export const sections = [
     section:
       "## Tables\n\n| Header 1 | Header 2 |\n| -------- | -------- |\n| Cell 1   | Cell 2   |\n| Cell 3   | Cell 4   |\n",
     id: "bbef43ce-9959-44dc-be58-e6ba89f6750a",
-  },
-  {
-    section:
-      "## Introduction\n\n  As a `proud cat owner`, I've experienced the joy and challenges that come with having a long-haired feline companion. One aspect that requires special attention is grooming, particularly brushing their luxurious coats. In this guide, I'll share insights into the art of brushing long hair cats, highlighting key differences compared to their short-haired counterparts.",
-    id: "2cdaedfc-9aef-41e1-ba57-0e41092192fe",
   },
 ]

@@ -2,20 +2,34 @@ import { Color } from "@tiptap/extension-color"
 import { Underline } from "@tiptap/extension-underline"
 import { EditorProvider } from "@tiptap/react"
 import { StarterKit } from "@tiptap/starter-kit"
-import { containerClasses, sectionClasses } from "../../data"
+import { containerClasses, sectionClasses, sections } from "../../data"
 import TextStyle from "@tiptap/extension-text-style"
 import ToolBar from "./Toolbar"
-
-const content = "Hello World!"
+import { Markdown } from "tiptap-markdown"
+import { Image as ImagePlugin } from "@tiptap/extension-image"
 
 const TiptapEditor = () => {
   return (
     <section className={sectionClasses}>
       <EditorProvider
         slotBefore={<ToolBar />}
-        extensions={[StarterKit, Underline, Color.configure({ types: [TextStyle.name] }), TextStyle]}
-        content={content}
-        editorProps={{ attributes: { class: containerClasses } }}
+        extensions={[
+          StarterKit,
+          ImagePlugin.configure({
+            inline: true,
+          }),
+          Underline,
+          Color.configure({ types: [TextStyle.name] }),
+          TextStyle,
+          Markdown,
+        ]}
+        content={sections[0].section}
+        onUpdate={({ editor }) => {
+          console.log(editor.storage.markdown.getMarkdown())
+        }}
+        editorProps={{
+          attributes: { class: containerClasses },
+        }}
       />
     </section>
   )
