@@ -49,7 +49,7 @@ const config: InitialConfigType = {
   },
 }
 
-const Editor = () => {
+const LexicalEditor = () => {
   return (
     <LexicalComposer initialConfig={config}>
       <ToolbarPlugin />
@@ -73,4 +73,4 @@ const Editor = () => {
   )
 }
 
-export default Editor
+export default LexicalEditor

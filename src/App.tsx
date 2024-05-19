@@ -1,7 +1,7 @@
-import Editor from "./Editor"
+import LexicalEditor from "./components/LexicalEditor"
 
 const App = () => {
-  return <Editor />
+  return <LexicalEditor />
 }
 
 export default App
