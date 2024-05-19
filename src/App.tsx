@@ -1,7 +1,13 @@
 import LexicalEditor from "./components/LexicalEditor"
+import TiptapEditor from "./components/TipTapEditor"
 
 const App = () => {
-  return <LexicalEditor />
+  return (
+    <>
+      <TiptapEditor />
+      <LexicalEditor />
+    </>
+  )
 }
 
 export default App

@@ -1,4 +1,4 @@
-import { HEADING } from "@lexical/markdown"
+import { $convertToMarkdownString, HEADING } from "@lexical/markdown"
 import { LexicalComposer, type InitialConfigType } from "@lexical/react/LexicalComposer"
 import { ContentEditable } from "@lexical/react/LexicalContentEditable"
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary"
@@ -15,6 +15,7 @@ import { $createUnremovableHeading, UnremovableHeadingNode } from "./plugins/Unr
 import { EmojiNode } from "./plugins/emoji/EmojiNode"
 import { ReactEmojiPlugin } from "./plugins/emoji/ReactEmojiPlugin"
 import editorTheme from "./theme"
+import { containerClasses, sectionClasses } from "../../data"
 
 const config: InitialConfigType = {
   namespace: "Lexical markdown editor",
@@ -46,6 +47,8 @@ const config: InitialConfigType = {
     )
 
     root.append(paragraph)
+
+    console.log($convertToMarkdownString())
   },
 }
 
@@ -54,9 +57,9 @@ const LexicalEditor = () => {
     <LexicalComposer initialConfig={config}>
       <ToolbarPlugin />
 
-      <section className="relative mx-auto my-6 max-w-2xl overflow-hidden rounded-xl border">
+      <section className={sectionClasses}>
         <RichTextPlugin
-          contentEditable={<ContentEditable className="prose w-full max-w-2xl rounded-tl-xl rounded-tr-xl px-3 py-4" />}
+          contentEditable={<ContentEditable className={containerClasses} />}
           placeholder={
             <div className="absolute left-3 top-4 overflow-hidden text-gray-400">Enter some rich text...</div>
           }

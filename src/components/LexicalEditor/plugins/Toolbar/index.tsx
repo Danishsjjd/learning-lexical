@@ -1,3 +1,4 @@
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
 import { mergeRegister } from "@lexical/utils"
 import {
   $getSelection,
@@ -10,25 +11,17 @@ import {
   SELECTION_CHANGE_COMMAND,
   UNDO_COMMAND,
 } from "lexical"
-import { ComponentPropsWithoutRef, useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { toolbarClasses } from "../../../../data"
+import Divider from "../../../Divider"
+import ToolbarButton, { itemClasses } from "../../../ToolbarButton"
 import { INSERT_CUSTOM_PARAGRAPH_COMMAND } from "../CustomParagraph/plugin"
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
 
 const LowPriority = 1
-
-function Divider() {
-  return <div className="mx-1 w-px self-stretch bg-neutral-200" />
-}
-
-const itemClasses =
-    "rounded-lg border-0 bg-none p-2 text-sm opacity-60 disabled:opacity-20 disabled:cursor-not-allowed [&>span]:flex [&>span]:aspect-square [&>span]:size-6 [&>span]:items-center [&>span]:justify-center",
-  spacedClasses = "mr-0.5",
-  activeClasses = "bg-gray-300"
 
 function ToolbarPlugin() {
   const [editor] = useLexicalComposerContext()
 
-  const toolbarRef = useRef(null)
   const [canUndo, setCanUndo] = useState(false)
   const [canRedo, setCanRedo] = useState(false)
   const [isBold, setIsBold] = useState(false)
@@ -84,83 +77,83 @@ function ToolbarPlugin() {
   }, [editor, $updateToolbar])
 
   return (
-    <div
-      className="sticky top-0 z-50 mb-1 flex items-center justify-center rounded-tl-lg rounded-tr-lg bg-white p-1"
-      ref={toolbarRef}
-    >
-      <Button disabled={!canUndo} onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)} aria-label="Undo">
+    <div className={toolbarClasses}>
+      <ToolbarButton
+        disabled={!canUndo}
+        onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
+        aria-label="Undo"
+      >
         <span>U</span>
-      </Button>
-      <Button
+      </ToolbarButton>
+      <ToolbarButton
         disabled={!canRedo}
         onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
         className={itemClasses}
         aria-label="Redo"
       >
         <span>R</span>
-      </Button>
+      </ToolbarButton>
       <Divider />
-      <Button
+      <ToolbarButton
         onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")}
         active={isBold}
         aria-label="Format Bold"
       >
         <span>B</span>
-      </Button>
-      <Button
+      </ToolbarButton>
+      <ToolbarButton
         onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")}
         active={isItalic}
         aria-label="Format Italics"
       >
         <span>I</span>
-      </Button>
-      <Button
+      </ToolbarButton>
+      <ToolbarButton
         onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")}
         active={isUnderline}
         aria-label="Format Underline"
       >
         <span>U</span>
-      </Button>
-      <Button
+      </ToolbarButton>
+      <ToolbarButton
         onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code")}
         aria-label="Format Inline Code"
         active={isInlineCode}
       >
         <span>C</span>
-      </Button>
-      <Button
+      </ToolbarButton>
+      <ToolbarButton
         onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")}
         active={isStrikethrough}
         aria-label="Format Strikethrough"
       >
         <span>ST</span>
-      </Button>
+      </ToolbarButton>
       <Divider />
-      <Button
+      <ToolbarButton
         onClick={() => editor.dispatchCommand(INSERT_CUSTOM_PARAGRAPH_COMMAND, undefined)}
         aria-label="Insert custom paragraph"
       >
         <span>CP</span>
-      </Button>
+      </ToolbarButton>
       <Divider />
-      <Button onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")} aria-label="Left Align">
+      <ToolbarButton onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")} aria-label="Left Align">
         <span>LA</span>
-      </Button>
-      <Button onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")} aria-label="Center Align">
+      </ToolbarButton>
+      <ToolbarButton onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")} aria-label="Center Align">
         <span>CA</span>
-      </Button>
-      <Button onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right")} aria-label="Right Align">
+      </ToolbarButton>
+      <ToolbarButton onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right")} aria-label="Right Align">
         <span>RA</span>
-      </Button>
-      <Button aria-label="Justify Align" onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify")}>
+      </ToolbarButton>
+      <ToolbarButton
+        aria-label="Justify Align"
+        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify")}
+      >
         <span>JA</span>
-      </Button>
+      </ToolbarButton>
     </div>
   )
-}
-
-const Button = ({ className, active, ...props }: ComponentPropsWithoutRef<"button"> & { active?: boolean }) => {
-  return <button className={`${itemClasses} ${spacedClasses} ${active ? activeClasses : ""} ${className}`} {...props} />
 }
 
 export default ToolbarPlugin
