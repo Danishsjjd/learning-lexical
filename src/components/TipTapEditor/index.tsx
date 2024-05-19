@@ -10,7 +10,7 @@ import { Image as ImagePlugin } from "@tiptap/extension-image"
 
 const TiptapEditor = () => {
   return (
-    <section className={sectionClasses}>
+    <section>
       <EditorProvider
         slotBefore={<ToolBar />}
         extensions={[
@@ -28,7 +28,7 @@ const TiptapEditor = () => {
           console.log(editor.storage.markdown.getMarkdown())
         }}
         editorProps={{
-          attributes: { class: containerClasses },
+          attributes: { class: `${containerClasses} ${sectionClasses}` },
         }}
       />
     </section>
