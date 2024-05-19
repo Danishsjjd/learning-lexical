@@ -21,7 +21,9 @@ const TiptapEditor = () => {
           Underline,
           Color.configure({ types: [TextStyle.name] }),
           TextStyle,
-          Markdown,
+          Markdown.configure({
+            html: false,
+          }),
         ]}
         content={sections[0].section}
         onUpdate={({ editor }) => {
