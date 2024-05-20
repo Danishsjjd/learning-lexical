@@ -8,6 +8,8 @@ import { Markdown } from "tiptap-markdown"
 import { containerClasses, sectionClasses, sections } from "../../data"
 import ToolBar from "./Toolbar"
 import { useState } from "react"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import coldark from "react-syntax-highlighter/dist/esm/styles/prism/coldark-dark"
 
 const TiptapEditor = () => {
   const [jsonString, setJsonString] = useState("")
@@ -43,9 +45,9 @@ const TiptapEditor = () => {
           attributes: { class: `${containerClasses} ${sectionClasses}` },
         }}
       />
-      <div className="tree-view-output">
-        <pre>{jsonString}</pre>
-      </div>
+      <SyntaxHighlighter language="javascript" style={coldark} className="tree-view-output">
+        {jsonString}
+      </SyntaxHighlighter>
     </section>
   )
 }
